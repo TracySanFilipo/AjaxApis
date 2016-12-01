@@ -9,7 +9,6 @@ function listCharacters(){
                 var $name = $('<li>').text(data.results[i].name);
                 console.log($name)
                 $("#planetx").append($name)
-
                 }
             var $total = data.count
             var $uptick = data.results.length
@@ -73,26 +72,36 @@ function listVehicles(){
             $("#planetx").append($name)
             var testlastpage = data.next
             }
+            var $total = data.count
+            var $uptick = data.results.length
+            var j = 2
+            while ($uptick < $total){
+                var new_url = "http://swapi.co/api/vehicles/?page=" + j
+                j++
+                $uptick++
+                $uptick++
+                $uptick++
+                $uptick++
+                $uptick++
+                $uptick++
+                $uptick++
+                $uptick++
+                $uptick++
+                $uptick++
+                console.log(j)
+                $.ajax({
+                    url: new_url,
+                    success: function(data) {
+                    for (var i = 0; i < data.results.length; i++){
+                        var $name = $('<li>').text(data.results[i].name);
+                        console.log($name)
+                        $("#planetx").append($name)
+                    }
+                    }
+                })
+            }
         }
     })
-    // while (testlastpage = !null){
-    //     var j = 2
-    //     var new_url = "http://swapi.co/api/people/?page=" + j
-    //     j++
-    //     console.log(j)
-    //     $.ajax({
-    //         url: new_url,
-    //         success: function(data) {
-    //         for (var i = 0; i < data.results.length; i++){
-    //             var $name = $('<li>').text(data.results[i].name);
-    //             console.log($name)
-    //             $("#planetx").append($name)
-    //             testlastpage = data.next
-    //             }
-    //         }
-    //     })
-    // }
-
 }
 
 function characterDetails(charname){
