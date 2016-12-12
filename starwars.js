@@ -4,45 +4,25 @@ function listCharacters(){
     $("#planetx").empty()
     $.ajax({
         url: "http://swapi.co/api/people/",
-        success: function(data) {
+    }).done(function(data) {
             for (var i = 0; i < data.results.length; i++){
-                var $name = $('<li>').text(data.results[i].name);
-                console.log($name)
-                $("#planetx").append($name)
+                $("#planetx").append($('<li>').text(data.results[i].name))
                 }
-            var $total = data.count
             var $uptick = data.results.length
             var j = 2
-            while ($uptick < $total){
+            while ($uptick < data.count){
                 var new_url = "http://swapi.co/api/people/?page=" + j
                 j++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                console.log(j)
+                $uptick += 10
                 $.ajax({
                     url: new_url,
-                    success: function(data) {
+                }).done(function(data) {
                     for (var i = 0; i < data.results.length; i++){
-                        var $name = $('<li>').text(data.results[i].name);
-                        console.log($name)
-                        $("#planetx").append($name)
-                    }
+                        $("#planetx").append($('<li>').text(data.results[i].name))
                     }
                 })
             }
-
-            }
-    })
-
-
+        })
 }
 
 
@@ -50,14 +30,11 @@ function listFilms(){
     $("#planetx").empty()
     $.ajax({
         url: "http://swapi.co/api/films/",
-        success: function(data) {
+    }).done(function(data) {
             for (var i = 0; i < data.results.length; i++){
-            var $title = $('<li>').text(data.results[i].title);
-            console.log($title)
-            $("#planetx").append($title)
+            $("#planetx").append($('<li>').text(data.results[i].title))
             }
-        }
-    })
+        })
 }
 
 
@@ -65,274 +42,169 @@ function listVehicles(){
     $("#planetx").empty()
     $.ajax({
         url: "http://swapi.co/api/vehicles/",
-        success: function(data) {
+    }).done(function(data) {
             for (var i = 0; i < data.results.length; i++){
-            var $name = $('<li>').text(data.results[i].name);
-            console.log($name)
-            $("#planetx").append($name)
+            $("#planetx").append($('<li>').text(data.results[i].name))
             var testlastpage = data.next
             }
-            var $total = data.count
             var $uptick = data.results.length
             var j = 2
-            while ($uptick < $total){
+            while ($uptick < data.count){
                 var new_url = "http://swapi.co/api/vehicles/?page=" + j
                 j++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                $uptick++
-                console.log(j)
+                $uptick += 10
                 $.ajax({
                     url: new_url,
-                    success: function(data) {
+                }).done(function(data) {
                     for (var i = 0; i < data.results.length; i++){
-                        var $name = $('<li>').text(data.results[i].name);
-                        console.log($name)
-                        $("#planetx").append($name)
-                    }
+                        $("#planetx").append($('<li>').text(data.results[i].name))
                     }
                 })
             }
-        }
-    })
+        })
 }
 
 
 function characterDetails(){
     $("#planetx").empty()
-    detail_url = "https://swapi.co/api/people/?search=r2"
+    var query = $("#formcharname").val()
+    detail_url = "https://swapi.co/api/people/?search=" + query
     $.ajax({
         url: detail_url,
-        success: function(data) {
-            var $name = $('<li>').text(data.results[0].name)
-            var $height = $('<li>').text(data.results[0].height)
-            var $mass = $('<li>').text(data.results[0].mass)
-            var $hair_color = $('<li>').text(data.results[0].hair_color)
-            var $skin_color = $('<li>').text(data.results[0].skin_color)
-            var $eye_color = $('<li>').text(data.results[0].eye_color)
-            var $birth_year = $('<li>').text(data.results[0].birth_year)
-            var $gender = $('<li>').text(data.results[0].gender)
-            $("#planetx").append("Name: ")
-            $("#planetx").append($name)
-            $("#planetx").append("Height: ")
-            $("#planetx").append($height)
-            $("#planetx").append("Mass: ")
-            $("#planetx").append($mass)
-            $("#planetx").append("Hair color: ")
-            $("#planetx").append($hair_color)
-            $("#planetx").append("Skin color: ")
-            $("#planetx").append($skin_color)
-            $("#planetx").append("Eye color: ")
-            $("#planetx").append($eye_color)
-            $("#planetx").append("Birth year: ")
-            $("#planetx").append($birth_year)
-            $("#planetx").append("Gender: ")
-            $("#planetx").append($gender)
-            $("#planetx").append("Home world: ")
-            var $homeworld_url = data.results[0].homeworld[0]
-            console.log($homeworld_url)
+    }).done(function(data) {
+            $("#planetx").append($('<li>').text("Name: " + data.results[0].name))
+            $("#planetx").append($('<li>').text("Height: " + data.results[0].height))
+            $("#planetx").append($('<li>').text("Mass: " + data.results[0].mass))
+            $("#planetx").append($('<li>').text("Hair color: " + data.results[0].hair_color))
+            $("#planetx").append($('<li>').text("Skin color: " + data.results[0].skin_color))
+            $("#planetx").append($('<li>').text("Eye color: " + data.results[0].eye_color))
+            $("#planetx").append($('<li>').text("Birth year: " + data.results[0].birth_year))
+            $("#planetx").append($('<li>').text("Gender: " + data.results[0].gender))
+            var homeworld_url = data.results[0].homeworld
             $.ajax({
-                url: $homeworld_url,
-                success: function(homedata) {
-                    var home_worldname = homedata.name
-                    $("#planetx").append($home_worldname)
-                }
-            })
-            $("#planetx").append("Films appeared in: ")
-            for (k in data.results[0].films){
-                var $film_url = k
+                url: homeworld_url,
+            }).done(function(homedata) {
+                    $("#planetx").append($('<li>').text("Home world: " + homedata.name))
+                })
+            for (var k = 0; k < data.results[0].films.length; k++){
+                var $film_url = data.results[0].films[k]
                 $.ajax({
                     url: $film_url,
-                    success: function(filmdata) {
-                        var $filmtitle = $('<li>').text(filmdata.title)
-                        $("#planetx").append($filmtitle)
-                    }
-                })
+                }).done(function(filmdata) {
+                        $("#planetx").append($('<li>').text(filmdata.title))
+                    })
             }
-            $("#planetx").append("Species: ")
             var $species_url = data.results[0].species
             $.ajax({
                 url: $species_url,
-                success: function(speciesdata) {
-                    var $species = speciesdata.name
-                    $("#planetx").append($species)
-                }
-            })
-            $("#planetx").append("Vehicles: ")
-            for (m in data.results[0].vehicles){
-                $vehicle_url = m
+            }).done(function(speciesdata) {
+                    $("#planetx").append($('<li>').text("Species: " + speciesdata.name))
+                })
+            for (var m = 0; m < data.results[0].vehicles.length; m++){
+                $vehicle_url = data.results[0].vehicles[m]
                 $.ajax({
                     url: $vehicle_url,
-                    success: function(vehicledata) {
-                        var $vehname = $('<li>').text(vehicledata.name)
-                        $("#planetx").append($vehname)
-                    }
-                })
+                }).done(function(vehicledata) {
+                        $("#planetx").append($('<li>').text("Vehicle: " + vehicledata.name))
+                    })
             }
-            $("#planetx").append("Starships: ")
-            for (n in data.results[0].starships){
-                $starships_url = n
+            for (var n = 0; n < data.results[0].starships.length; n++){
+                $starships_url = data.results[0].starships[n]
                 $.ajax({
-                    url: $starships,
-                    success: function(shipdata) {
-                        var $shipname = $('<li>').text(shipdata.name)
-                        $("#planetx").append($shipname)
-                    }
-                })
+                    url: $starships_url,
+                }).done(function(shipdata) {
+                        $("#planetx").append($('<li>').text("Starship: " + shipdata.name))
+                    })
             }
-        }
-    })
+        })
 }
 
 
 function filmDetails(){
     $("#planetx").empty()
-    detail_url = "https://swapi.co/api/films/?search=force"
+    var query = $("#formfilmname").val()
+    detail_url = "https://swapi.co/api/films/?search=" + query
     $.ajax({
         url: detail_url,
-        success: function(data) {
-            var $title = $('<li>').text(data.results[0].title)
-            var $episode_id = $('<li>').text(data.results[0].episode_id)
-            var $opening = $('<li>').text(data.results[0].opening_crawl)
-            var $director = $('<li>').text(data.results[0].director)
-            var $producer = $('<li>').text(data.results[0].producer)
-            var $date = $('<li>').text(data.results[0].release_date)
-            var $character1 = $('<li>').text(data.results[0].characters[0])
-            var $character2 = $('<li>').text(data.results[0].characters[1])
-            var $character3 = $('<li>').text(data.results[0].characters[2])
-            $("#planetx").append("Title: ")
-            $("#planetx").append($title)
-            $("#planetx").append("Episode id: ")
-            $("#planetx").append($episode_id)
-            $("#planetx").append("Opening text: ")
-            $("#planetx").append($opening)
-            $("#planetx").append("Director: ")
-            $("#planetx").append($director)
-            $("#planetx").append("Producer: ")
-            $("#planetx").append($producer)
-            $("#planetx").append("Release date: ")
-            $("#planetx").append($date)
-            $("#planetx").append("Three characters: ")
-            $("#planetx").append($character1)
-            $("#planetx").append($character2)
-            $("#planetx").append($character3)
-            $("#planetx").append("Planets: ")
-            console.log($homeworld_url)
-            for (m in data.results[0].planets){
-                $planets_url = m
+    }).done(function(data) {
+            $("#planetx").append($('<li>').text("Title: " + data.results[0].title))
+            $("#planetx").append($('<li>').text("Episode id: " + data.results[0].episode_id))
+            $("#planetx").append($('<li>').text("Opening text: " + data.results[0].opening_crawl))
+            $("#planetx").append($('<li>').text("Director: " + data.results[0].director))
+            $("#planetx").append($('<li>').text("Producer: " + data.results[0].producer))
+            $("#planetx").append($('<li>').text("Release date: " + data.results[0].release_date))
+            for (var m = 0; m < data.results[0].planets.length; m++){
+                $planets_url = data.results[0].planets[m]
                 $.ajax({
                     url: $planets_url,
-                    success: function(planetdata) {
-                        var $planetname = $('<li>').text(planetdata.name)
-                        $("#planetx").append($planetname)
-                    }
-                })
+                }).done(function(planetdata) {
+                        $("#planetx").append($('<li>').text("Planet: " + planetdata.name))
+                    })
             }
-            $("#planetx").append("Films appeared in: ")
-            for (k in data.results[0].films){
-                var $film_url = k
+            for (var k = 0; k < 3; k++){
+                var $char_url = data.results[0].characters[k]
                 $.ajax({
-                    url: $film_url,
-                    success: function(filmdata) {
-                        var $filmtitle = $('<li>').text(filmdata.title)
-                        $("#planetx").append($filmtitle)
-                    }
-                })
+                    url: $char_url,
+                }).done(function(chardata) {
+                        $("#planetx").append($('<li>').text("Characters appeared in: " + chardata.name))
+                    })
             }
-            $("#planetx").append("Species: ")
-            for (m in data.results[0].species){
-                $species_url = m
+            for (var m = 0; m < data.results[0].species.length; m++){
+                $species_url = data.results[0].species[m]
                 $.ajax({
                     url: $species_url,
-                    success: function(speciesdata) {
-                        var $speciesname = $('<li>').text(speciesdata.name)
-                        $("#planetx").append($speciesname)
-                    }
-                })
+                }).done(function(speciesdata) {
+                        $("#planetx").append($('<li>').text("Species: " + speciesdata.name))
+                    })
             }
-            $("#planetx").append("Vehicles: ")
-            for (m in data.results[0].vehicles){
-                $vehicle_url = m
+            for (var m = 0; m < data.results[0].vehicles.length; m++){
+                $vehicle_url = data.results[0].vehicles[m]
                 $.ajax({
                     url: $vehicle_url,
-                    success: function(vehicledata) {
-                        var $vehname = $('<li>').text(vehicledata.name)
-                        $("#planetx").append($vehname)
-                    }
+                }).done(function(vehicledata) {
+                        $("#planetx").append($('<li>').text("Vehicles: " + vehicledata.name))
                 })
             }
-            $("#planetx").append("Starships: ")
-            for (n in data.results[0].starships){
-                $starships_url = n
+            for (var n = 0; n < data.results[0].starships.length; n++){
+                $starships_url = data.results[0].starships[n]
                 $.ajax({
-                    url: $starships,
-                    success: function(shipdata) {
-                        var $shipname = $('<li>').text(shipdata.name)
-                        $("#planetx").append($shipname)
-                    }
-                })
+                    url: $starships_url,
+                }).done(function(shipdata) {
+                        $("#planetx").append($('<li>').text("Starship: " + shipdata.name))
+                    })
             }
-        }
-    })
+        })
 }
 
 
 function vehicleDetails(){
     $("#planetx").empty()
-    detail_url = "https://swapi.co/api/vehicles/?search=2"
+    var query = $("#formvehiclename").val()
+    detail_url = "https://swapi.co/api/vehicles/?search=" + query
     $.ajax({
         url: detail_url,
-        success: function(data) {
-            var $name = $('<li>').text(data.results[0].name)
-            var $model = $('<li>').text(data.results[0].model)
-            var $manufacturer = $('<li>').text(data.results[0].manufacturer)
-            var $cost_in_credits = $('<li>').text(data.results[0].cost_in_credits)
-            var $length = $('<li>').text(data.results[0].length)
-            var $max_atmosphering_speed = $('<li>').text(data.results[0].max_atmosphering_speed)
-            var $crew = $('<li>').text(data.results[0].crew)
-            var $passengers = $('<li>').text(data.results[0].passengers)
-            var $cargo_capacity = $('<li>').text(data.results[0].cargo_capacity)
-            var $consumables = $('<li>').text(data.results[0].consumables)
-            var $vehicle_class = $('<li>').text(data.results[0].vehicle_class)
-            $("#planetx").append("Name: ")
-            $("#planetx").append($name)
-            $("#planetx").append("Model: ")
-            $("#planetx").append($model)
-            $("#planetx").append("Manufacturer: ")
-            $("#planetx").append($manufacturer)
-            $("#planetx").append("Cost in credits: ")
-            $("#planetx").append($cost_in_credits)
-            $("#planetx").append("Length: ")
-            $("#planetx").append($length)
-            $("#planetx").append("Max atmosphering speed: ")
-            $("#planetx").append($max_atmosphering_speed)
-            $("#planetx").append("Crew: ")
-            $("#planetx").append($crew)
-            $("#planetx").append("Passengers: ")
-            $("#planetx").append($passengers)
-            $("#planetx").append("Cargo capacity: ")
-            $("#planetx").append($cargo_capacity)
-            $("#planetx").append("Consumables: ")
-            $("#planetx").append($consumables)
-            $("#planetx").append("Vehicle class: ")
-            $("#planetx").append($vehicle_class)
-        }
+    }).done(function(data) {
+            console.log(data)
+            $("#planetx").append($('<li>').text("Name: " + data.results[0].name))
+            $("#planetx").append($('<li>').text("Model: " + data.results[0].model))
+            $("#planetx").append($('<li>').text("Manufacturer: " + data.results[0].manufacturer))
+            $("#planetx").append($('<li>').text("Cost in credits: " + data.results[0].cost_in_credits))
+            $("#planetx").append($('<li>').text("Length: " + data.results[0].length))
+            $("#planetx").append($('<li>').text("Max atmosphering speed: " + data.results[0].max_atmosphering_speed))
+            $("#planetx").append($('<li>').text("Crew: " + data.results[0].crew))
+            $("#planetx").append($('<li>').text("Passengers: " + data.results[0].passengers))
+            $("#planetx").append($('<li>').text("Cargo capacity: " + data.results[0].cargo_capacity))
+            $("#planetx").append($('<li>').text("Consumables: " + data.results[0].consumables))
+            $("#planetx").append($('<li>').text("Vehicle class: " + data.results[0].vehicle_class))
     })
 }
 
 
-$('#wattoButton').click(characterDetails)
+$('#charsubmit').click(characterDetails)
 
-$('#awakeButton').click(filmDetails)
+$('#filmsubmit').click(filmDetails)
 
-$('#sithButton').click(vehicleDetails)
+$('#vehiclesubmit').click(vehicleDetails)
 
 $("#characterlistButton").click(listCharacters)
 

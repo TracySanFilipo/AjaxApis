@@ -1,0 +1,14 @@
+html{
+    background-color: #000033;
+    color: #ffffff;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+}
+li{
+    list-style: none;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+}
+h1 {
+    text-align: center;
+}

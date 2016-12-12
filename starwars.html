@@ -9,13 +9,26 @@
         <button id="characterlistButton">Character List</button>
         <button id="filmlistButton">Film List</button>
         <button id="vehiclelistButton">Vehicles List</button>
-        <button id="wattoButton">Watto </button>
-        <button id="awakeButton">Awake </button>
-        <button id="sithButton">Sith</button>
-        <form>Character name: <input type="text" name="charname" id="formcharname"/>
-            <input type="button" id="charButton" />
+        <form  name="characterform" id="characterform" action="javascript:;" method="post">
+            <label>Character name: </label>
+            <input type="text" name="charname" id="formcharname"/>
+            <button type="submit" name="charsubmit" id="charsubmit">Submit</button>
         </form>
-        <div id="planetx"><ol></ol></div>
+        <form name="filmsform" id="filmsform" action="javascript:;" method="post">
+            <label>Film title: </label>
+            <input type="text" name="filmname" id="formfilmname"/>
+            <button type="submit" name="filmsubmit" id="filmsubmit">Submit</button>
+        </form>
+        <form name="vehicleform" id="vehicleform" action="javascript:;" method="post">
+            <label>Vehicle name: </label>
+            <input type="text" name="vehiclename" id="formvehiclename"/>
+            <button type="submit" name="vehiclesubmit" id="vehiclesubmit">Submit</button>
+        </form>
+        <h1>Star Wars Information</h1>
+        <div id="planetx">
+            <ul>
+            </ul>
+        </div>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
