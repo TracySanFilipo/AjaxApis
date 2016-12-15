@@ -72,7 +72,7 @@ function characterDetails(){
     $.ajax({
         url: detail_url,
     }).done(function(data) {
-        if (data.length == 0){
+        if (data.results.length == 0){
             $("#planetx").append($('<li>').text("That isn't the search term you're looking for..."))
         }
         else {
@@ -132,7 +132,7 @@ function filmDetails(){
     $.ajax({
         url: detail_url,
     }).done(function(data) {
-        if (data.length == 0){
+        if (data.results.length == 0){
             $("#planetx").append($('<li>').text("Mmm. Lost a detail, you have. How embarrassing"))
         }
         else {
@@ -194,7 +194,7 @@ function vehicleDetails(){
     $.ajax({
         url: detail_url,
     }).done(function(data) {
-        if (data.length == 0){
+        if (data.results.length == 0){
             $("#planetx").append($('<li>').text("That isn't the search term you're looking for..."))
         }
         else {
