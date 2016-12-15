@@ -72,6 +72,10 @@ function characterDetails(){
     $.ajax({
         url: detail_url,
     }).done(function(data) {
+        if (data.length == 0){
+            $("#planetx").append($('<li>').text("That isn't the search term you're looking for..."))
+        }
+        else {
             $("#planetx").append($('<li>').text("Name: " + data.results[0].name))
             $("#planetx").append($('<li>').text("Height: " + data.results[0].height))
             $("#planetx").append($('<li>').text("Mass: " + data.results[0].mass))
@@ -116,7 +120,8 @@ function characterDetails(){
                         $("#planetx").append($('<li>').text("Starship: " + shipdata.name))
                     })
             }
-        })
+        }
+    })
 }
 
 
@@ -127,6 +132,10 @@ function filmDetails(){
     $.ajax({
         url: detail_url,
     }).done(function(data) {
+        if (data.length == 0){
+            $("#planetx").append($('<li>').text("Mmm. Lost a detail, you have. How embarrassing"))
+        }
+        else {
             $("#planetx").append($('<li>').text("Title: " + data.results[0].title))
             $("#planetx").append($('<li>').text("Episode id: " + data.results[0].episode_id))
             $("#planetx").append($('<li>').text("Opening text: " + data.results[0].opening_crawl))
@@ -173,7 +182,8 @@ function filmDetails(){
                         $("#planetx").append($('<li>').text("Starship: " + shipdata.name))
                     })
             }
-        })
+        }
+    })
 }
 
 
@@ -184,6 +194,10 @@ function vehicleDetails(){
     $.ajax({
         url: detail_url,
     }).done(function(data) {
+        if (data.length == 0){
+            $("#planetx").append($('<li>').text("That isn't the search term you're looking for..."))
+        }
+        else {
             console.log(data)
             $("#planetx").append($('<li>').text("Name: " + data.results[0].name))
             $("#planetx").append($('<li>').text("Model: " + data.results[0].model))
@@ -196,6 +210,7 @@ function vehicleDetails(){
             $("#planetx").append($('<li>').text("Cargo capacity: " + data.results[0].cargo_capacity))
             $("#planetx").append($('<li>').text("Consumables: " + data.results[0].consumables))
             $("#planetx").append($('<li>').text("Vehicle class: " + data.results[0].vehicle_class))
+        }
     })
 }
 
